@@ -1,8 +1,11 @@
 # Florida Building Attributes GPT
 
-**Created: December 4, 2025**
-
 Florida Building Attributes GPT is designed to identify basic building attributes from aerial and street-level images, with a focus on buildings in Florida.
+
+https://chatgpt.com/g/g-689f867ede3481919e5f7060171d0936-florida-building-attributes
+
+**Created: December 4, 2025**
+Florida Building Attributes GPT was created on December 4, 2025, when GPT-5.1 was the current ChatGPT generation. The specific model configuration used by the custom GPT at the time of creation was not independently verified.
 
 ## How It Works
 
