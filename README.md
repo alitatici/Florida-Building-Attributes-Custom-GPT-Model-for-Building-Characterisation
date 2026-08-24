@@ -1,205 +1,86 @@
-# 🏢 Florida Building Attributes GPT
+# Florida Building Attributes GPT
 
-**Florida Building Attributes** is a specialized computer-vision GPT designed to estimate structural and architectural characteristics of buildings from aerial and street-level imagery.
+**Created: December 4, 2025**
 
-It is primarily designed for **buildings in Florida** and uses visual evidence, construction characteristics, and year-built information to produce a standardized set of building attributes.
+Florida Building Attributes GPT is designed to identify basic building attributes from aerial and street-level images, with a focus on buildings in Florida.
 
-The goal is to make building-image assessment **faster, consistent, and easy to transfer into Excel, GIS, or building-inventory datasets**.
+## How It Works
 
-## 🔍 What It Does
+Provide:
 
-Provide the GPT with the **year built** and one or more images of the same building, such as:
+1. **Year Built**
+2. **Aerial Image** — Google Earth, satellite, or drone image
+3. **Street-Level Image** — Google Street View or ground photograph
+4. **Damaged Building Image** — optional, if available
 
-- 🛰️ **Aerial imagery** — Google Earth, satellite, or drone imagery
-- 🏠 **Street-level imagery** — Google Street View or ground photographs
-- 🏚️ **Post-damage imagery** — photographs showing a damaged building
+One to three images of the same building can be provided.
 
-The GPT visually evaluates the available evidence and estimates a predefined set of building attributes.
+The GPT visually analyzes the building and returns the estimated attributes in a horizontal table that can be copied into Excel.
 
-## 🧱 Attributes Identified
-
-The GPT estimates:
-
-| Attribute | Example |
-|---|---|
-| Roof Shape | hip |
-| Roof Cover | Type: Asphalt shingles |
-| Roof Material | wood |
-| Shape of Building | rectangular |
-| Number of Stories | 1 |
-| Window Area | Low (<25%) |
-| Lateral Load Resisting System (LLRS) | wall |
-| Material of LLRS | masonry |
-| Exterior Walls | stucco |
+## Building Attributes
 
 ### Roof Shape
 
-Examples include:
+Options:
 
-`flat`, `hip`, `gable`, `monopitch`, `sawtooth`, `curved`, `complex_regular`, and `complex_irregular`.
-
-Aerial imagery is particularly useful for determining roof geometry and building footprint.
+`flat`, `hip`, `gable`, `monopitch`, `sawtooth`, `curved`, `complex_regular`, `complex_irregular`, etc.
 
 ### Roof Cover
 
-The GPT estimates the visible roof-covering system, such as:
+Examples:
 
-- Asphalt shingles
-- Built-up roof
-- Single-ply membrane
-- Metal roofing
-- Tile roofing
+`Built-up roof`, `Single-ply membrane`, `Asphalt shingles`, `Metal roofing`, `Tile roofing`, etc.
 
 ### Roof Material
 
-The likely structural roof material is estimated separately from the roof covering.
+Options:
 
-Examples include:
+`masonry`, `earth`, `concrete`, `metal`, `wood`, `fabric`, `slate`, `stone`, `clay`, etc.
 
-`masonry`, `concrete`, `metal`, `wood`, `slate`, `stone`, and `clay`.
+### Shape of Building
 
-### Building Shape
+Options:
 
-The building footprint is classified into forms such as:
-
-`square`, `rectangular`, `l_shape`, `curved`, `triangular`, `polygonal`, `e_shape`, `h_shape`, `s_shape`, `t_shape`, `u_c_shape`, `x-shape`, and `y-shape`.
+`square`, `rectangular`, `l_shape`, `curved`, `triangular`, `polygonal`, `e_shape`, `h_shape`, `s_shape`, `t_shape`, `u_c_shape`, `x-shape`, `y-shape`, etc.
 
 ### Number of Stories
 
-Visible floors are counted primarily from the street-level imagery.
+The number of visible floors is estimated from the street-level image.
 
 ### Window Area
 
-The visible façade is classified using three standardized categories:
+Options:
 
-- **Low:** <25% window area
-- **Medium:** 25–40% window area
-- **High:** >40% window area
+- `Low (<25%)`
+- `Medium (25–40%)`
+- `High (>40%)`
 
-### Lateral Load Resisting System
+### Lateral Load Resisting System (LLRS)
 
-The GPT estimates the most likely **Lateral Load Resisting System (LLRS)**.
+Options:
 
-Possible classifications include:
+`moment_frame`, `infilled_frame`, `braced_frame`, `post_beam`, `wall`, `dual_framewall`, `flat_slab`, `waffle_slab`, `infill_flatslab`, `infill_waffleslab`, `hybrid`, etc.
 
-`moment_frame`, `infilled_frame`, `braced_frame`, `post_beam`, `wall`, `dual_framewall`, `flat_slab`, `waffle_slab`, `infill_flatslab`, `infill_waffleslab`, and `hybrid`.
+### Material of LLRS
 
-Because the structural system is often concealed by exterior finishes, this attribute cannot always be determined directly from photographs.
+Options:
 
-When visual evidence is insufficient, the GPT uses the **year built, visible construction characteristics, building type, and common Florida construction practices** to determine the most likely classification.
-
-### LLRS Material
-
-Possible structural materials include:
-
-`concrete_reinforced`, `concrete`, `concrete_steel`, `metal`, `masonary_reinforced`, `masonry`, `masonry_confined`, `earth`, `earth_reinforced`, and `wood`.
+`concrete_reinforced`, `concrete`, `concrete_steel`, `metal`, `masonary_reinforced`, `masonry`, `masonry_confined`, `earth`, `earth_reinforced`, `wood`, etc.
 
 ### Exterior Walls
 
-Visible exterior wall materials may include:
+Options:
 
-`concrete`, `glass`, `earth`, `masonry`, `metal`, `vegetation`, `wood`, `stucco`, `plastic`, `vinyl`, and `cement`.
+`concrete`, `glass`, `earth`, `masonry`, `metal`, `vegetation`, `wood`, `stucco`, `plastic`, `vinyl`, `cement`, etc.
 
-## 📊 Standardized Output
+## Output
 
-Results are deliberately returned as a **single horizontal table**.
+The GPT returns one horizontal table:
 
-This makes the output easy to copy directly into:
-
-- Microsoft Excel
-- Google Sheets
-- GIS attribute tables
-- Building inventory databases
-- Exposure and vulnerability datasets
-- Post-disaster building assessments
-
-Example:
-
-| Roof Shape | Roof Cover | Roof Material | Shape of Building | Number of Stories | Window Area | Lateral Load Resisting System (LLRS) | Material of LLRS | Exterior Walls |
-|---|---|---|---|---:|---|---|---|---|
+| Roof Shape | Roof Cover | Roof Material | Shape of Building | Number of Stories | Window Area | LLRS | Material of LLRS | Exterior Walls |
+|---|---|---|---|---|---|---|---|---|
 | hip | Type: Asphalt shingles | wood | rectangular | 1 | Low (<25%) | wall | masonry | stucco |
 
-If an attribute cannot be determined confidently, the GPT marks the result with **`(Unsure)`** rather than presenting the estimate as certain.
+If an attribute cannot be determined confidently, the GPT adds **`(Unsure)`**.
 
-## 🌴 Why Florida?
-
-Florida has distinctive construction practices influenced by:
-
-- Hurricane and wind-load requirements
-- Coastal exposure
-- Flood risk
-- Changes in building codes over time
-- Extensive use of concrete masonry construction
-- Wood-frame residential construction
-- Stucco exterior finishes
-- Hip and gable roof systems
-- Shingle, tile, membrane, and metal roofing
-
-The GPT therefore uses **Florida construction practices as its default regional context** when visual evidence alone is insufficient.
-
-This is particularly important when estimating structural attributes that cannot be directly observed from exterior photographs.
-
-## 💡 Potential Applications
-
-Florida Building Attributes can support workflows involving:
-
-- 🌀 Hurricane vulnerability and risk assessment
-- 🏚️ Post-disaster building surveys
-- 🗺️ GIS building inventories
-- 🏙️ Urban-scale building characterization
-- 🏗️ Structural typology classification
-- 📊 Exposure modeling
-- 🛡️ Insurance and catastrophe-risk research
-- 🔬 Academic research
-- 🤖 AI-assisted building image analysis
-
-## ⚠️ Important Limitations
-
-The GPT performs **visual estimation**, not a structural inspection.
-
-Some attributes—particularly structural systems, concealed materials, roof structural materials, and LLRS classifications—cannot be conclusively identified from exterior imagery alone.
-
-Results should therefore be treated as **AI-assisted classifications or estimates**.
-
-They should not replace:
-
-- Engineering inspections
-- Architectural or structural drawings
-- Building permits
-- Property records
-- Code-compliance assessments
-- Professional structural evaluations
-
-Image quality, viewing angle, vegetation, neighboring structures, façade modifications, roof visibility, and post-construction renovations can all affect classification accuracy.
-
-## 🚀 Basic Workflow
-
-**1. Provide the year built**
-
-Example:
-
-`Year Built: 1985`
-
-**2. Upload available building imagery**
-
-Ideally provide both an aerial and street-level image of the same structure.
-
-**3. Receive standardized attributes**
-
-The GPT analyzes the images and returns one horizontal table containing the estimated building characteristics.
-
-**4. Transfer the results**
-
-Copy the resulting row directly into Excel, a spreadsheet, GIS workflow, or another building database.
-
-## 🎯 Project Goal
-
-Florida Building Attributes is intended to explore how multimodal AI can assist with **rapid, standardized building characterization from imagery**.
-
-Rather than producing lengthy descriptions of buildings, the GPT focuses on a concise set of attributes useful for structured building inventories and vulnerability-analysis workflows.
-
----
-
-### Disclaimer
-
-**Florida Building Attributes is an experimental AI-assisted building classification tool. Outputs may contain errors or uncertain classifications. Structural characteristics should be independently verified when used for engineering, safety, insurance, regulatory, or other consequential decisions.**
+When the LLRS or its material cannot be clearly identified from the images, the GPT uses the **year built and common Florida construction practices** to estimate the most likely option.
