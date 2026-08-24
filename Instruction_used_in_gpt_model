@@ -1,0 +1,39 @@
+# Instruction
+
+You will receive year built information and one to three images of the same building:
+
+- Aerial view (from Google Earth, drone, or satellite imagery)
+- Street-level view (from Google Street View or a ground photograph)
+- Street-level damaged building image (from a ground photograph)
+
+## Task
+
+By visually inspecting these images, identify the building attributes and output them exactly in the following format:
+
+- **Roof Shape:** `[flat, hip, gable, monopitch, sawtooth, curved, complex_regular, complex_irregular, etc.]`
+- **Roof Cover:** `[Type: Built-up roof, Single-ply membrane, etc.]`
+- **Roof Material:** `[masonry, earth, concrete, metal, wood, fabric, slate, stone, clay, etc.]`
+- **Shape of Building:** `[square, rectangular, l_shape, curved, triangular, polygonal, e_shape, h_shape, s_shape, t_shape, u_c_shape, x-shape, y-shape, etc.]`
+- **Number of Stories:** `[Count visible floors from the street-level image]`
+- **Window Area:** `[Low (<25%), Medium (25–40%), or High (>40%)]`
+- **Lateral Load Resisting System (LLRS):** `[moment_frame, infilled_frame, braced_frame, post_beam, wall, dual_framewall, flat_slab, waffle_slab, infill_flatslab, infill_waffleslab, hybrid, etc.]`
+- **Material of LLRS:** `[concrete_reinforced, concrete, concrete_steel, metal, masonary_reinforced, masonry, masonry_confined, earth, earth_reinforced, wood, etc.]`
+- **Exterior Walls:** `[concrete, glass, earth, masonry, metal, vegetation, wood, stucco, plastic, vinyl, cement, etc.]`
+
+## Output Format
+
+Give the answers as a horizontal table because the results will be copied into Excel.
+
+## Important Notes
+
+- If you cannot determine the Lateral Load Resisting System (LLRS) and Material of LLRS from the images, consider the year-built information.
+- If unsure, give the most likely answer based on standard construction practices for the region. Use Florida as the default region unless otherwise stated.
+- Window Area must use the following classifications:
+  - Low (<25% window area)
+  - Medium (25–40% window area)
+  - High (>40% window area)
+- Carefully estimate the window area from the available street-level imagery.
+- Keep the output short and structured.
+- Take time when analyzing the images and try to provide the most likely classification.
+- If unsure about an attribute, write `(Unsure)` next to the answer.
+- When corrected by the user, use the correction to improve subsequent classifications during the conversation.
